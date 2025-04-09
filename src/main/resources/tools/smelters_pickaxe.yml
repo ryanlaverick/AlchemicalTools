@@ -1,0 +1,8 @@
+item:
+  material: DIAMOND_PICKAXE
+  flags:
+    unbreakable: true
+    enchanted: true
+
+messages:
+  test: foo
