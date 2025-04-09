@@ -2,12 +2,14 @@ package io.github.ryanlaverick;
 
 import io.github.ryanlaverick.command.AlchemicalToolsCommand;
 import io.github.ryanlaverick.framework.file.ToolFileCache;
+import io.github.ryanlaverick.framework.item.ToolCache;
 import io.github.ryanlaverick.listener.CustomToolUsedListener;
 import io.github.ryanlaverick.listener.TriggerCustomToolUsedListener;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class AlchemicalTools extends JavaPlugin {
     private ToolFileCache toolFileCache;
+    private ToolCache toolCache;
 
     @Override
     public void onEnable() {
@@ -16,9 +18,10 @@ public class AlchemicalTools extends JavaPlugin {
         this.getServer().getPluginManager().registerEvents(new TriggerCustomToolUsedListener(), this);
         this.getServer().getPluginManager().registerEvents(new CustomToolUsedListener(), this);
 
-        this.getCommand("alchemicaltools").setExecutor(new AlchemicalToolsCommand());
+        this.getCommand("alchemicaltools").setExecutor(new AlchemicalToolsCommand(this));
 
         this.toolFileCache = new ToolFileCache(this);
+        this.toolCache = new ToolCache(this);
     }
 
     @Override
@@ -28,5 +31,9 @@ public class AlchemicalTools extends JavaPlugin {
 
     public ToolFileCache getToolFileCache() {
         return toolFileCache;
+    }
+
+    public ToolCache getToolCache() {
+        return toolCache;
     }
 }

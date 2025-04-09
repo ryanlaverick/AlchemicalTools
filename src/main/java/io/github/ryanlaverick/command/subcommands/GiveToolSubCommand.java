@@ -1,5 +1,6 @@
 package io.github.ryanlaverick.command.subcommands;
 
+import io.github.ryanlaverick.AlchemicalTools;
 import io.github.ryanlaverick.framework.command.SubCommand;
 import io.github.ryanlaverick.item.Tool;
 import org.bukkit.Bukkit;
@@ -7,6 +8,11 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 public final class GiveToolSubCommand extends SubCommand {
+    private AlchemicalTools alchemicalTools;
+    public GiveToolSubCommand(AlchemicalTools alchemicalTools) {
+        this.alchemicalTools = alchemicalTools;
+    }
+
     @Override
     public String getName() {
         return "alchemicaltools_give";
@@ -53,7 +59,7 @@ public final class GiveToolSubCommand extends SubCommand {
                 return true;
             }
 
-            commandSender.sendMessage("Giving player " + targetPlayer.getName() + " tool " + tool.getName());
+            ((Player) commandSender).getInventory().addItem(this.alchemicalTools.getToolCache().getItemStack(tool));
         }
 
         return true;
