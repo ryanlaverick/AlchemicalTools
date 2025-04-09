@@ -1,5 +1,6 @@
 item:
-  material: DIAMOND_PICKAXE
+  material: 'DIAMOND_PICKAXE'
+  display_name: '&bSMELTERS PICKAXE'
   flags:
     unbreakable: true
     enchanted: true
