@@ -1,0 +1,5 @@
+name: AlchemicalTools
+version: 0.0.1-SNAPSHOT
+main: io.github.ryanlaverick.AlchemicalTools
+api-version: 1.19
+author: Ryan Laverick (Novur)
