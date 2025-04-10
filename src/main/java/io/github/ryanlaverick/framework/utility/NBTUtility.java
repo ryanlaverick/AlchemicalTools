@@ -1,6 +1,8 @@
-package io.github.ryanlaverick.framework.item;
+package io.github.ryanlaverick.framework.utility;
 
 import io.github.ryanlaverick.AlchemicalTools;
+import io.github.ryanlaverick.framework.item.NBTKey;
+import io.github.ryanlaverick.framework.item.Tool;
 import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -33,5 +35,17 @@ public final class NBTUtility {
         }
 
         return false;
+    }
+
+    public Tool getToolFromItemStack(ItemStack itemStack) {
+        ItemMeta itemMeta = itemStack.getItemMeta();
+
+        assert itemMeta != null;
+        PersistentDataContainer persistentDataContainer = itemMeta.getPersistentDataContainer();
+
+        return Tool.tryFrom(persistentDataContainer.get(
+                new NamespacedKey(this.alchemicalTools, NBTKey.ALCHEMICAL_TOOLS_TYPE.getKey()),
+                PersistentDataType.STRING
+        ));
     }
 }

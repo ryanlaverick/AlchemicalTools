@@ -2,7 +2,7 @@ package io.github.ryanlaverick.command.subcommands;
 
 import io.github.ryanlaverick.AlchemicalTools;
 import io.github.ryanlaverick.framework.command.SubCommand;
-import io.github.ryanlaverick.item.Tool;
+import io.github.ryanlaverick.framework.item.Tool;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
