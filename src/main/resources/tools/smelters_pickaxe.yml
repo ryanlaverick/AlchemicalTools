@@ -17,5 +17,8 @@ conversions:
   ANCIENT_DEBRIS:
     to: 'NETHERITE_SCRAP'
 
+options:
+  drops_to_floor: true
+
 messages:
   test: foo

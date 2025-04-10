@@ -20,6 +20,7 @@ import java.util.Set;
 
 public final class SmeltersPickaxeHandler extends ToolHandler {
     private final Map<Material, Material> materialMap;
+    private final boolean dropsToFloor;
 
     public SmeltersPickaxeHandler(AlchemicalTools alchemicalTools) {
         this.materialMap = new EnumMap<>(Material.class);
@@ -52,6 +53,8 @@ public final class SmeltersPickaxeHandler extends ToolHandler {
                 this.materialMap.put(actualMaterial, mappedMaterial);
             }
         }
+
+        this.dropsToFloor = toolFile.getBoolean("options.drops_to_floor");
     }
 
     @Override
@@ -76,6 +79,12 @@ public final class SmeltersPickaxeHandler extends ToolHandler {
         ItemStack itemStack = new ItemStack(material);
 
         blockBreakEvent.setDropItems(false);
-        world.dropItemNaturally(block.getLocation(), itemStack);
+
+        if (this.dropsToFloor) {
+            world.dropItemNaturally(block.getLocation(), itemStack);
+        } else {
+            Player player = customToolUsedEvent.getPlayer();
+            player.getInventory().addItem(itemStack);
+        }
     }
 }
