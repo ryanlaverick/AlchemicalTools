@@ -5,7 +5,6 @@ import io.github.ryanlaverick.event.CustomToolUsedEvent;
 import io.github.ryanlaverick.framework.item.Tool;
 import io.github.ryanlaverick.framework.item.ToolHandler;
 import io.github.ryanlaverick.framework.sound.SoundProfile;
-import io.github.ryanlaverick.framework.sound.exception.InvalidSoundException;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Block;
@@ -65,11 +64,7 @@ public final class SmeltersPickaxeHandler extends ToolHandler {
         if (toolFile.isConfigurationSection("options")) {
             this.dropsToFloor = toolFile.getBoolean("options.drops_to_floor");
 
-            try {
-                this.soundProfile = new SoundProfile(alchemicalTools, toolFile);
-            } catch (InvalidSoundException ex) {
-                alchemicalTools.getLogger().severe(ex.getMessage());
-            }
+            this.soundProfile = new SoundProfile(alchemicalTools, toolFile);
         }
     }
 

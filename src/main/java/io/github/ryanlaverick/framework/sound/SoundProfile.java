@@ -1,8 +1,6 @@
 package io.github.ryanlaverick.framework.sound;
 
 import io.github.ryanlaverick.AlchemicalTools;
-import io.github.ryanlaverick.framework.item.Tool;
-import io.github.ryanlaverick.framework.sound.exception.InvalidSoundException;
 import org.bukkit.Sound;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
