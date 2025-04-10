@@ -15,7 +15,7 @@ public class AlchemicalTools extends JavaPlugin {
     public void onEnable() {
         this.getLogger().info("Plugin Enabled");
 
-        this.getServer().getPluginManager().registerEvents(new TriggerCustomToolUsedListener(), this);
+        this.getServer().getPluginManager().registerEvents(new TriggerCustomToolUsedListener(this), this);
         this.getServer().getPluginManager().registerEvents(new CustomToolUsedListener(), this);
 
         this.getCommand("alchemicaltools").setExecutor(new AlchemicalToolsCommand(this));
