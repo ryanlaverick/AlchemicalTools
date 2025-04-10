@@ -4,6 +4,8 @@ import io.github.ryanlaverick.AlchemicalTools;
 import io.github.ryanlaverick.event.CustomToolUsedEvent;
 import io.github.ryanlaverick.framework.item.Tool;
 import io.github.ryanlaverick.framework.item.ToolHandler;
+import io.github.ryanlaverick.framework.sound.SoundProfile;
+import io.github.ryanlaverick.framework.sound.exception.InvalidSoundException;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Block;
@@ -20,6 +22,7 @@ import java.util.Set;
 
 public final class SmeltersPickaxeHandler extends ToolHandler {
     private final Map<Material, Material> materialMap;
+    private SoundProfile soundProfile;
     private boolean dropsToFloor = true;
 
     public SmeltersPickaxeHandler(AlchemicalTools alchemicalTools) {
@@ -31,7 +34,6 @@ public final class SmeltersPickaxeHandler extends ToolHandler {
     @Override
     public void load(AlchemicalTools alchemicalTools) {
         FileConfiguration toolFile = alchemicalTools.getToolFileCache().getFile(Tool.SMELTERS_PICKAXE).getFileConfiguration();
-
         if (toolFile.isConfigurationSection("conversions")) {
             Set<String> mappings = toolFile.getConfigurationSection("conversions").getKeys(false);
 
@@ -60,7 +62,11 @@ public final class SmeltersPickaxeHandler extends ToolHandler {
             }
         }
 
-        this.dropsToFloor = toolFile.getBoolean("options.drops_to_floor");
+        if (toolFile.isConfigurationSection("options")) {
+            this.dropsToFloor = toolFile.getBoolean("options.drops_to_floor");
+
+            this.soundProfile = new SoundProfile(toolFile);
+        }
     }
 
     @Override
@@ -81,15 +87,16 @@ public final class SmeltersPickaxeHandler extends ToolHandler {
             return;
         }
 
+        Player player = customToolUsedEvent.getPlayer();
         Material material = this.materialMap.get(block.getType());
         ItemStack itemStack = new ItemStack(material);
 
         blockBreakEvent.setDropItems(false);
+        this.soundProfile.play(player);
 
         if (this.dropsToFloor) {
             world.dropItemNaturally(block.getLocation(), itemStack);
         } else {
-            Player player = customToolUsedEvent.getPlayer();
             player.getInventory().addItem(itemStack);
         }
     }

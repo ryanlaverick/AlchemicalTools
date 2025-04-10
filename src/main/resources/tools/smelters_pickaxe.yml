@@ -19,6 +19,11 @@ conversions:
 
 options:
   drops_to_floor: true
+  sound:
+    plays_sound: true
+    sound: 'ENTITY_BLAZE_HURT'
+    volume: 1
+    pitch: 1
 
 messages:
   test: foo
