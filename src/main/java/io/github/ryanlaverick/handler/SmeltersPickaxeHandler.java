@@ -10,6 +10,7 @@ import org.bukkit.block.Block;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.inventory.ItemStack;
 
@@ -35,6 +36,11 @@ public final class SmeltersPickaxeHandler extends ToolHandler {
                     continue;
                 }
 
+                if (this.materialMap.containsKey(actualMaterial)) {
+                    alchemicalTools.getLogger().severe("ERROR: Unable to map Material {material} for Smelters Pickaxe as it has already been mapped!".replace("{material}", materialName));
+                    continue;
+                }
+
                 String mappedTo = toolFile.getString("conversions." + materialName + ".to");
                 Material mappedMaterial = Material.matchMaterial(mappedTo);
 
@@ -49,27 +55,20 @@ public final class SmeltersPickaxeHandler extends ToolHandler {
     }
 
     @Override
-    @EventHandler
+    @EventHandler(priority = EventPriority.MONITOR)
     public void handleTool(CustomToolUsedEvent customToolUsedEvent) {
-        Player player = customToolUsedEvent.getPlayer();
-        player.sendMessage("Consuming event for custom tool used...");
-
         if (customToolUsedEvent.isCancelled()) {
-            player.sendMessage("Cancelled");
             return;
         }
 
-        if (customToolUsedEvent.getTool() != Tool.SMELTERS_PICKAXE || ! (customToolUsedEvent.getTrigger() instanceof BlockBreakEvent)) {
-            player.sendMessage("Tool not smelters pickaxe, or item is not block break event");
+        if (customToolUsedEvent.getTool() != Tool.SMELTERS_PICKAXE || ! (customToolUsedEvent.getTrigger() instanceof BlockBreakEvent blockBreakEvent)) {
             return;
         }
 
-        BlockBreakEvent blockBreakEvent = (BlockBreakEvent) customToolUsedEvent.getTrigger();
         Block block = blockBreakEvent.getBlock();
         World world = block.getWorld();
 
         if (! this.materialMap.containsKey(block.getType())) {
-            player.sendMessage("Material is not mapped");
             return;
         }
 
