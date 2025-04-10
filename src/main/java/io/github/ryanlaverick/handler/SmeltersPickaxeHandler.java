@@ -20,10 +20,16 @@ import java.util.Set;
 
 public final class SmeltersPickaxeHandler extends ToolHandler {
     private final Map<Material, Material> materialMap;
-    private final boolean dropsToFloor;
+    private boolean dropsToFloor = true;
 
     public SmeltersPickaxeHandler(AlchemicalTools alchemicalTools) {
         this.materialMap = new EnumMap<>(Material.class);
+
+        this.load(alchemicalTools);
+    }
+
+    @Override
+    public void load(AlchemicalTools alchemicalTools) {
         FileConfiguration toolFile = alchemicalTools.getToolFileCache().getFile(Tool.SMELTERS_PICKAXE).getFileConfiguration();
 
         if (toolFile.isConfigurationSection("conversions")) {
