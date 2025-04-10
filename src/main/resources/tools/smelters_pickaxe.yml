@@ -7,5 +7,15 @@ item:
   flags:
     unbreakable: true
 
+conversions:
+  STONE:
+    to: 'STONE'
+  IRON_ORE:
+    to: 'IRON_INGOT'
+  GOLD_ORE:
+    to: 'GOLD_INGOT'
+  ANCIENT_DEBRIS:
+    to: 'NETHERITE_SCRAP'
+
 messages:
   test: foo
