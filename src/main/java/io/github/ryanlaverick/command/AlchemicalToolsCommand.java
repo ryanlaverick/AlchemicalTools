@@ -1,5 +1,6 @@
 package io.github.ryanlaverick.command;
 
+import io.github.ryanlaverick.AlchemicalTools;
 import io.github.ryanlaverick.framework.command.AggregateCommand;
 import io.github.ryanlaverick.command.subcommands.GiveToolSubCommand;
 import org.bukkit.command.Command;
@@ -7,8 +8,8 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 public final class AlchemicalToolsCommand extends AggregateCommand {
-    public AlchemicalToolsCommand() {
-        this.registerSubCommand("give", new GiveToolSubCommand());
+    public AlchemicalToolsCommand(AlchemicalTools alchemicalTools) {
+        this.registerSubCommand("give", new GiveToolSubCommand(alchemicalTools));
     }
 
     @Override
