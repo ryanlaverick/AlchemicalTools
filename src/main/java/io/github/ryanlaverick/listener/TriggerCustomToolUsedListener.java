@@ -2,8 +2,8 @@ package io.github.ryanlaverick.listener;
 
 import io.github.ryanlaverick.AlchemicalTools;
 import io.github.ryanlaverick.event.CustomToolUsedEvent;
-import io.github.ryanlaverick.framework.item.NBTKey;
-import io.github.ryanlaverick.framework.item.NBTUtility;
+import io.github.ryanlaverick.framework.item.Tool;
+import io.github.ryanlaverick.framework.utility.NBTUtility;
 import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -25,8 +25,12 @@ public final class TriggerCustomToolUsedListener implements Listener {
 
         if (itemInHand.getType().isAir()) return;
 
-        if (this.nbtUtility.hasNBTKey(itemInHand, NBTKey.ALCHEMICAL_TOOLS_TYPE)) {
-            Bukkit.getServer().getPluginManager().callEvent(new CustomToolUsedEvent(event.getPlayer(), itemInHand));
+        Tool tool = this.nbtUtility.getToolFromItemStack(itemInHand);
+
+        if (tool == null) {
+            return;
         }
+
+        Bukkit.getServer().getPluginManager().callEvent(new CustomToolUsedEvent(event.getPlayer(), event, tool, itemInHand));
     }
 }

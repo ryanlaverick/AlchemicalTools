@@ -1,5 +1,6 @@
 package io.github.ryanlaverick.event;
 
+import io.github.ryanlaverick.framework.item.Tool;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Cancellable;
 import org.bukkit.event.Event;
@@ -8,14 +9,18 @@ import org.bukkit.inventory.ItemStack;
 
 public final class CustomToolUsedEvent extends Event implements Cancellable {
     private final Player player;
+    private final Event trigger;
+    private final Tool tool;
     private final ItemStack triggeringItem;
 
     private boolean isCancelled;
 
     private static final HandlerList HANDLER_LIST = new HandlerList();
 
-    public CustomToolUsedEvent(Player player, ItemStack triggeringItem) {
+    public CustomToolUsedEvent(Player player, Event trigger, Tool tool, ItemStack triggeringItem) {
         this.player = player;
+        this.trigger = trigger;
+        this.tool = tool;
         this.triggeringItem = triggeringItem;
     }
 
@@ -26,6 +31,14 @@ public final class CustomToolUsedEvent extends Event implements Cancellable {
 
     public Player getPlayer() {
         return player;
+    }
+
+    public Event getTrigger() {
+        return trigger;
+    }
+
+    public Tool getTool() {
+        return tool;
     }
 
     public ItemStack getTriggeringItem() {
