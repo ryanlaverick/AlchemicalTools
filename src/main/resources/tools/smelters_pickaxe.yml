@@ -5,7 +5,7 @@ item:
     - ''
     - '&7>> &c&oInstantly smelt your ores!'
   flags:
-    unbreakable: true
+    unbreakable: true # Determines if the item should be unbreakable (unaffected by durability)
 
 conversions:
   STONE:
@@ -18,7 +18,12 @@ conversions:
     to: 'NETHERITE_SCRAP'
 
 options:
-  drops_to_floor: true
+  drops_to_floor: true # Determines if the item is dropped to the floor (true) or is added directly to the user's inventory (false)
+  sound:
+    plays_sound: true # Set this to `false` if no sound should be played
+    sound: 'ENTITY_BLAZE_HURT' # See: https://helpch.at/docs/1.19/org/bukkit/Sound.html -- if a valid Sound cannot be parsed we override `plays_sound` to being `false`
+    volume: 1 # Determines overall volume of Sound that is played to the user
+    pitch: 1 # Determines overall pitch of Sound that is played to the user
 
 messages:
   test: foo
