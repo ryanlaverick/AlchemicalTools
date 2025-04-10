@@ -1,7 +1,7 @@
 package io.github.ryanlaverick.framework.file;
 
 import io.github.ryanlaverick.AlchemicalTools;
-import io.github.ryanlaverick.item.Tool;
+import io.github.ryanlaverick.framework.item.Tool;
 
 import java.util.EnumMap;
 import java.util.Map;

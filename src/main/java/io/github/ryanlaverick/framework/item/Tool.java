@@ -1,4 +1,4 @@
-package io.github.ryanlaverick.item;
+package io.github.ryanlaverick.framework.item;
 
 public enum Tool {
     SMELTERS_PICKAXE("smelters_pickaxe");

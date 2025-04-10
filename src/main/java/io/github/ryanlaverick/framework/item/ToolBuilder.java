@@ -1,14 +1,10 @@
 package io.github.ryanlaverick.framework.item;
 
 import io.github.ryanlaverick.AlchemicalTools;
-import io.github.ryanlaverick.framework.file.ToolFile;
 import io.github.ryanlaverick.framework.utility.StringFormatter;
-import io.github.ryanlaverick.item.Tool;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
-import org.bukkit.attribute.Attribute;
 import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataContainer;

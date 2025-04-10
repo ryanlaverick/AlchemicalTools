@@ -1,11 +1,9 @@
 package io.github.ryanlaverick.framework.item;
 
 import io.github.ryanlaverick.AlchemicalTools;
-import io.github.ryanlaverick.item.Tool;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.EnumMap;
-import java.util.HashMap;
 import java.util.Map;
 
 public final class ToolCache {
