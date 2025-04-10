@@ -1,9 +1,11 @@
 item:
   material: 'DIAMOND_PICKAXE'
-  display_name: '&bSMELTERS PICKAXE'
+  display_name: '&7>>  &cSmelters Pickaxe'
+  lore:
+    - ''
+    - '&7>> &c&oInstantly smelt your ores!'
   flags:
     unbreakable: true
-    enchanted: true
 
 messages:
   test: foo
