@@ -65,7 +65,11 @@ public final class SmeltersPickaxeHandler extends ToolHandler {
         if (toolFile.isConfigurationSection("options")) {
             this.dropsToFloor = toolFile.getBoolean("options.drops_to_floor");
 
-            this.soundProfile = new SoundProfile(toolFile);
+            try {
+                this.soundProfile = new SoundProfile(alchemicalTools, toolFile);
+            } catch (InvalidSoundException ex) {
+                alchemicalTools.getLogger().severe(ex.getMessage());
+            }
         }
     }
 
