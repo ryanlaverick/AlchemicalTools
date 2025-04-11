@@ -16,6 +16,8 @@ conversions:
     to: 'GOLD_INGOT'
   ANCIENT_DEBRIS:
     to: 'NETHERITE_SCRAP'
+  LAPIS_LAZULI_ORE:
+    to: 'LAPIZ_LAZULI'
 
 options:
   drops_to_floor: true # Determines if the item is dropped to the floor (true) or is added directly to the user's inventory (false)
@@ -28,6 +30,23 @@ options:
     plays_effect: true # Set this to `false` if no Effect should be played
     effect: 'SMOKE' # See: https://helpch.at/docs/1.19/org/bukkit/Effect.html -- if a valid Effect cannot be parsed we override `plays_effect` to being `false`
     data: 10 # Data bit associated with the Effect -- for the 'SMOKE' Effect this seems to be the multiplier
+  fortune:
+    COAL:
+      base_drop_amount: 1
+      minimum_drop_amount: 1
+      maximum_drop_amount: 4
+    IRON_INGOT:
+      base_drop_amount: 1
+      minimum_drop_amount: 1
+      maximum_drop_amount: 3
+    GOLD_INGOT:
+      base_drop_amount: 2
+      minimum_drop_amount: 2
+      maximum_drop_amount: 4
+    LAPIS_LAZULI:
+      base_drop_amount: 5 # Represents how many items are dropped by default when breaking a mapped item with this drop
+      minimum_drop_amount: 5 # Represents the minimum amount of drops (factoring in fortune) the Player can receive
+      maximum_drop_amount: 17 # Represents the maximum amount of drops (factoring in fortune) the Player can receive
 
 messages:
   test: foo
