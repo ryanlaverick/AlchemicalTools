@@ -3,6 +3,7 @@ package io.github.ryanlaverick.handler;
 import io.github.ryanlaverick.AlchemicalTools;
 import io.github.ryanlaverick.event.CustomToolUsedEvent;
 import io.github.ryanlaverick.framework.effect.EffectProfile;
+import io.github.ryanlaverick.framework.fortune.FortuneProfile;
 import io.github.ryanlaverick.framework.item.Tool;
 import io.github.ryanlaverick.framework.item.ToolHandler;
 import io.github.ryanlaverick.framework.sound.SoundProfile;
@@ -24,6 +25,7 @@ public final class SmeltersPickaxeHandler extends ToolHandler {
     private final Map<Material, Material> materialMap;
     private SoundProfile soundProfile;
     private EffectProfile effectProfile;
+    private FortuneProfile fortuneProfile;
     private boolean dropsToFloor = true;
 
     public SmeltersPickaxeHandler(AlchemicalTools alchemicalTools) {
@@ -68,6 +70,7 @@ public final class SmeltersPickaxeHandler extends ToolHandler {
 
             this.soundProfile = new SoundProfile(alchemicalTools, toolFile);
             this.effectProfile = new EffectProfile(alchemicalTools, toolFile);
+            this.fortuneProfile = new FortuneProfile(alchemicalTools, toolFile);
         }
     }
 
@@ -90,11 +93,23 @@ public final class SmeltersPickaxeHandler extends ToolHandler {
         }
 
         Player player = customToolUsedEvent.getPlayer();
+        ItemStack triggeringItem = customToolUsedEvent.getTriggeringItem();
+
         Material material = this.materialMap.get(block.getType());
-        ItemStack itemStack = new ItemStack(material);
+
+        int calculatedDropAmount = this.fortuneProfile.getDropsForMaterial(material, triggeringItem);
+        if (calculatedDropAmount == 0) {
+            for (ItemStack itemStack : block.getDrops(triggeringItem, player)) {
+                if (itemStack.getType().equals(material)) {
+                    calculatedDropAmount = itemStack.getAmount();
+                }
+            }
+        }
+
+        ItemStack itemStack = new ItemStack(material, calculatedDropAmount);
 
         blockBreakEvent.setDropItems(false);
-        
+
         this.soundProfile.play(player);
         this.effectProfile.play(player, block.getLocation());
 
