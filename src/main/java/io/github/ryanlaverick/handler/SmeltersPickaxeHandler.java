@@ -99,11 +99,7 @@ public final class SmeltersPickaxeHandler extends ToolHandler {
 
         int calculatedDropAmount = this.fortuneProfile.getDropsForMaterial(material, triggeringItem);
         if (calculatedDropAmount == 0) {
-            for (ItemStack itemStack : block.getDrops(triggeringItem, player)) {
-                if (itemStack.getType().equals(material)) {
-                    calculatedDropAmount = itemStack.getAmount();
-                }
-            }
+            calculatedDropAmount = 1;
         }
 
         ItemStack itemStack = new ItemStack(material, calculatedDropAmount);
