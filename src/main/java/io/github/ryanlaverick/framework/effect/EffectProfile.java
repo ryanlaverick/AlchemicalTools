@@ -9,6 +9,7 @@ import org.bukkit.entity.Player;
 public final class EffectProfile {
     private boolean shouldPlayEffect;
     private Effect effect = null;
+    private int data = 0;
 
     public EffectProfile(AlchemicalTools alchemicalTools, FileConfiguration configurationFile) {
         this.shouldPlayEffect = configurationFile.getBoolean("options.effect.plays_effect");
@@ -25,6 +26,8 @@ public final class EffectProfile {
             alchemicalTools.getLogger().severe("Unable to parse Effect {effect}".replace("{effect}", effectString));
             this.shouldPlayEffect = false;
         }
+
+        this.data = configurationFile.getInt("options.effect.data");
     }
 
     public void play(Player player, Location location) {
@@ -32,6 +35,6 @@ public final class EffectProfile {
             return;
         }
 
-        player.playEffect(location, this.effect, null);
+        player.playEffect(location, this.effect, this.data);
     }
 }
