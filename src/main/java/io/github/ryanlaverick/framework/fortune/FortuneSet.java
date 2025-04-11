@@ -30,16 +30,13 @@ public final class FortuneSet {
         }
 
         int randomDrops = NumberUtility.getRandomNumber(fortuneLevel + 2) - 1;
+        int itemsToDrop = this.getBaseDropAmount() * (randomDrops + 1);
 
-        if (randomDrops < this.getMinimumTheoreticalDrops()) {
+        if (itemsToDrop < this.getMinimumTheoreticalDrops()) {
             return this.getMinimumTheoreticalDrops();
         }
 
-        if (randomDrops > this.getMaximumTheoreticalDrops()) {
-            return this.getMaximumTheoreticalDrops();
-        }
-
-        return this.getBaseDropAmount() * (randomDrops + 1);
+        return Math.min(itemsToDrop, this.getMaximumTheoreticalDrops());
     }
 
     public int getBaseDropAmount() {
