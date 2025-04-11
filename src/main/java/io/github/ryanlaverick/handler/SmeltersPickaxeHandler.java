@@ -2,6 +2,7 @@ package io.github.ryanlaverick.handler;
 
 import io.github.ryanlaverick.AlchemicalTools;
 import io.github.ryanlaverick.event.CustomToolUsedEvent;
+import io.github.ryanlaverick.framework.effect.EffectProfile;
 import io.github.ryanlaverick.framework.item.Tool;
 import io.github.ryanlaverick.framework.item.ToolHandler;
 import io.github.ryanlaverick.framework.sound.SoundProfile;
@@ -22,6 +23,7 @@ import java.util.Set;
 public final class SmeltersPickaxeHandler extends ToolHandler {
     private final Map<Material, Material> materialMap;
     private SoundProfile soundProfile;
+    private EffectProfile effectProfile;
     private boolean dropsToFloor = true;
 
     public SmeltersPickaxeHandler(AlchemicalTools alchemicalTools) {
@@ -65,6 +67,7 @@ public final class SmeltersPickaxeHandler extends ToolHandler {
             this.dropsToFloor = toolFile.getBoolean("options.drops_to_floor");
 
             this.soundProfile = new SoundProfile(alchemicalTools, toolFile);
+            this.effectProfile = new EffectProfile(alchemicalTools, toolFile);
         }
     }
 
@@ -91,7 +94,9 @@ public final class SmeltersPickaxeHandler extends ToolHandler {
         ItemStack itemStack = new ItemStack(material);
 
         blockBreakEvent.setDropItems(false);
+        
         this.soundProfile.play(player);
+        this.effectProfile.play(player, block.getLocation());
 
         if (this.dropsToFloor) {
             world.dropItemNaturally(block.getLocation(), itemStack);
